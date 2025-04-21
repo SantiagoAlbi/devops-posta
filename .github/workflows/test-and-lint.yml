@@ -39,17 +39,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set Environment Variables
-        env:
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-          TF_WORKSPACE: ${{ secrets.TF_WORKSPACE }}
-        run: echo "Environment variables set"
-      - name: Terraform lint
-        env:
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-          TF_WORKSPACE: ${{ secrets.TF_WORKSPACE }}
+      - name: Terraform lint  
         run: |
           cd infra/
           docker compose run --rm terraform -chdir=deploy/ init -backend=false
