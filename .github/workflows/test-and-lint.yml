@@ -11,7 +11,7 @@ on:
         description: "Token for DockerHub auth"
 
 jobs: 
-  pYthon:
+  python:
     name: Python
     runs-on: ubuntu-22.04
     steps:
