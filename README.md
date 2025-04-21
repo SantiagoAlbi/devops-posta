@@ -226,4 +226,4 @@ Or find them below:
 - [Build a Backend REST API with Python & Django REST Framework - Advanced](https://londonapp.dev/c2)
 - [Deploy a Serverless Django App on Google App Engine](https://londonapp.dev/c5)
 
-hello 123 italia
+hello 123 italia, BLU SG1 2026 Y VA1 2027
