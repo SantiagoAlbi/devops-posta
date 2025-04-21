@@ -8,10 +8,10 @@ on:
         description: "Username for Dockerhub auth"
       DOCKERHUB_TOKEN:
         required: true
-        description: "Token for Dockerhub auth"
+        description: "Token for DockerHub auth"
 
 jobs: 
-  puthon:
+  pYthon:
     name: Python
     runs-on: ubuntu-22.04
     steps:
@@ -23,6 +23,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Test
-        run: docker compose run --rm app -c "python manage.py wait_for_db && python manage.py test"
+        run: docker compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
       - name: Python flake8
         run: docker compose run --rm app sh -c "flake8"
