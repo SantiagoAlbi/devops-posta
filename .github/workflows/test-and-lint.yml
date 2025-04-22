@@ -10,7 +10,7 @@ on:
         required: true
         description: "Token for DockerHub auth"
 
-jobs: 
+jobs:
   python:
     name: Python
     runs-on: ubuntu-22.04
