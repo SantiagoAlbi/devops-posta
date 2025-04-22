@@ -10,7 +10,7 @@ terraform {
     key            = "tf-state-setup"
     encrypt        = true
     dynamodb_table = "devops-recipi-app-tf-lock-ita"
-    region = "us-east-1"
+    region         = "us-east-1"
   }
 }
 
@@ -19,10 +19,10 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Enviroment = terraform.workspace
+      Environment = terraform.workspace
       Project    = var.project
       contact    = var.contact
-      ManagedBy  = "Terraform/setup"
+      ManageBy  = "Terraform/setup"
 
     }
   }
