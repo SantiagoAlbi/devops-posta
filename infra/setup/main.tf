@@ -20,9 +20,9 @@ provider "aws" {
   default_tags {
     tags = {
       Environment = terraform.workspace
-      Project    = var.project
-      contact    = var.contact
-      ManageBy  = "Terraform/setup"
+      Project     = var.project
+      contact     = var.contact
+      ManageBy    = "Terraform/setup"
 
     }
   }
