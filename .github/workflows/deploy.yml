@@ -24,7 +24,7 @@ jobs:
        - name: Set vars
          run: |
            if [[ $GITHUB_REF == 'refs/heads/prod' ]]; then
-             echo "prod: > .workspace
+             echo "prod" > .workspace
            else
             echo "staging" > .workspace
            fi
