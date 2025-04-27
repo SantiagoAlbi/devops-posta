@@ -27,7 +27,6 @@ jobs:
       - name: Python flake8
         run: docker compose run --rm app sh -c "flake8"
 
-
   terraform:
     name: Terraform
     runs-on: ubuntu-22.04
@@ -39,7 +38,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Terraform lint  
+      - name: Terraform lint 
         run: |
           cd infra/
           docker compose run --rm terraform -chdir=deploy/ init -backend=false
