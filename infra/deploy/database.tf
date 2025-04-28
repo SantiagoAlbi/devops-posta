@@ -1,15 +1,13 @@
-####################
-# DATABASE
-###################
-
+############
+# Database #
+############
 
 resource "aws_db_subnet_group" "main" {
   name = "${local.prefix}-main"
   subnet_ids = [
     aws_subnet.private_a.id,
-    aws_subnet.private_b.id,
+    aws_subnet.private_b.id
   ]
-
 
   tags = {
     Name = "${local.prefix}-db-subnet-group"
@@ -26,9 +24,9 @@ resource "aws_security_group" "rds" {
     from_port = 5432
     to_port   = 5432
 
-   # security_groups = [
-   #   aws_security_group.ecs_service.id
-   # ]
+    #security_groups = [
+    #  aws_security_group.ecs_service.id
+    #]
   }
 
   tags = {
