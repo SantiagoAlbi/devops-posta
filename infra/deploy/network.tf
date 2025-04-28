@@ -1,6 +1,6 @@
-###################################3
-# NETWORK INFRASTRUCTURE
-##################################3
+##########################
+# Network infrastructure #
+##########################
 
 resource "aws_vpc" "main" {
   cidr_block           = "10.1.0.0/16"
@@ -8,10 +8,9 @@ resource "aws_vpc" "main" {
   enable_dns_support   = true
 }
 
-###################################################
-# Internet gateway needed for inbaund access to ALB
-###################################################
-
+#########################################################
+# Internet Gateway needed for inbound access to the ALB #
+#########################################################
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
@@ -20,10 +19,9 @@ resource "aws_internet_gateway" "main" {
   }
 }
 
-###############################################
-# Public Subnet for load balancer public access
-###############################################
-
+##################################################
+# Public subnets for load balancer public access #
+##################################################
 resource "aws_subnet" "public_a" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = "10.1.1.0/24"
@@ -53,10 +51,6 @@ resource "aws_route" "public_internet_access_a" {
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.main.id
 }
-
-############
-#subnet B
-###########
 
 resource "aws_subnet" "public_b" {
   vpc_id                  = aws_vpc.main.id
@@ -88,10 +82,9 @@ resource "aws_route" "public_internet_access_b" {
   gateway_id             = aws_internet_gateway.main.id
 }
 
-###############################################
-# Public Subnet for load balancer public access
-###############################################
-
+############################################
+# Private Subnets for internal access only #
+############################################
 resource "aws_subnet" "private_a" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.1.10.0/24"
@@ -112,12 +105,12 @@ resource "aws_subnet" "private_b" {
   }
 }
 
-#####################################################################
-# Endpoints to allow ECS to access ECR, Cloudwatch and System Manager
-#####################################################################
+#########################################################################
+## Endpoints to allow ECS to access ECR, CloudWatch and Systems Manager #
+#########################################################################
 
 resource "aws_security_group" "endpoint_access" {
-  description = "Access endpoints"
+  description = "Access to endpoints"
   name        = "${local.prefix}-endpoint-access"
   vpc_id      = aws_vpc.main.id
 
@@ -165,7 +158,7 @@ resource "aws_vpc_endpoint" "dkr" {
 
 resource "aws_vpc_endpoint" "cloudwatch_logs" {
   vpc_id              = aws_vpc.main.id
-  service_name        = "com.amazonaws.${data.aws_region.current.name}.ecr.logs"
+  service_name        = "com.amazonaws.${data.aws_region.current.name}.logs"
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
 
@@ -190,7 +183,7 @@ resource "aws_vpc_endpoint" "ssm" {
 
   security_group_ids = [
     aws_security_group.endpoint_access.id
-    ]
+  ]
 
   tags = {
     Name = "${local.prefix}-ssmmessages-endpoint"
@@ -201,11 +194,10 @@ resource "aws_vpc_endpoint" "s3" {
   vpc_id            = aws_vpc.main.id
   service_name      = "com.amazonaws.${data.aws_region.current.name}.s3"
   vpc_endpoint_type = "Gateway"
-  route_table_ids   = [aws_vpc.main.default_route_table_id]
-
+  route_table_ids = [
+    aws_vpc.main.default_route_table_id
+  ]
   tags = {
     Name = "${local.prefix}-s3-endpoint"
   }
 }
-
-
