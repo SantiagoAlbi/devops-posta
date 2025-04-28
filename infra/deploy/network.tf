@@ -188,7 +188,9 @@ resource "aws_vpc_endpoint" "ssm" {
 
   subnet_ids = [aws_subnet.private_a.id, aws_subnet.private_b.id]
 
-  security_group_ids = [aws_security_group.endpoint_access.id]
+  security_group_ids = [
+    aws_security_group.endpoint_access.id
+    ]
 
   tags = {
     Name = "${local.prefix}-ssmmessages-endpoint"
