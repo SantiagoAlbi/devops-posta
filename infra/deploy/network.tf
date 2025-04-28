@@ -111,7 +111,7 @@ resource "aws_subnet" "private_b" {
     Name = "${local.prefix}-private-b"
   }
 }
-/*
+
 #####################################################################
 # Endpoints to allow ECS to access ECR, Cloudwatch and System Manager
 #####################################################################
@@ -206,4 +206,4 @@ resource "aws_vpc_endpoint" "s3" {
   }
 }
 
-*/
+
