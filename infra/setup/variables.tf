@@ -9,13 +9,13 @@ variable "tf_state_lock_table" {
   default     = "devops-recipi-app-tf-lock-ita"
 }
 
+variable "project" {
+  description = "Project name for tagging resources"
+  default     = "recipe-app-api"
+}
+
 variable "contact" {
   description = "Contact name for tagging resources"
   default     = "santialbi@example.com" #aqui va el mail real del responsable del proyecto
   #type = string
-}
-
-variable "project" {
-  description = "Project name for tagging resources"
-  default     = "recipe-app-api"
 }
