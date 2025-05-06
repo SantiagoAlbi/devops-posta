@@ -170,7 +170,8 @@ data "aws_iam_policy_document" "rds" {
       "rds:CreateDBInstance",
       "rds:DeleteDBInstance",
       "rds:ListTagsForResource",
-      "rds:ModifyDBInstance"
+      "rds:ModifyDBInstance",
+      "rds:AddTagsToResource"
     ]
     resources = ["*"]
   }
@@ -186,3 +187,4 @@ resource "aws_iam_user_policy_attachment" "rds" {
   user       = aws_iam_user.cd.name
   policy_arn = aws_iam_policy.rds.arn
 }
+
